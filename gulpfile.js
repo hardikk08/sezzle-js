@@ -17,7 +17,7 @@ var gulp = require('gulp'),
   bump = require('gulp-bump');
 
 var buttonUploadName = `sezzle-widget${pjson.version}.js`;
-var globalCssUploadName = 'sezzle-styles-global2.0.2.css';
+var globalCssUploadName = `sezzle-styles-global${pjson.css-version}.css`;
 var newVersion = '';
 
 /**
@@ -48,7 +48,7 @@ gulp.task('csscompile', function () {
 gulp.task('cssupload', function () {
   // bucket base url https://d3svog4tlx445w.cloudfront.net/
   var indexPath = './dist/global-css/global.min.css'
-  gulp.src(indexPath)
+  return gulp.src(indexPath)
     .pipe(rename('shopify-app/assets/' + globalCssUploadName))
     .pipe(s3({
       Bucket: 'sezzlemedia', //  Required
