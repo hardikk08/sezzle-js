@@ -34,4 +34,4 @@ stages:
 
 try:
   stage: try
-  script: echo $CI_COMMIT_BEFORE_SHA
+  script: git log
