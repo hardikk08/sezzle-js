@@ -29,6 +29,8 @@ var SezzleJS = function(options) {
     }
   }
 
+
+
   // Sync up the rendertopath array with
   // xpath array, place null for not defined indices
   // to follow the default behaviour
@@ -100,6 +102,7 @@ var SezzleJS = function(options) {
   this.fontSize = options.fontSize || 12;
   this.maxWidth = options.maxWidth || 400; //pixels
   this.fixedHeight = options.fixedHeight || 0; //pixels
+  this.countryToShow = options.countryToShow || ['CA','US','IN']; // This can be CA, US or both
   // This is used to get price of element
   this.priceElementClass = options.priceElementClass || 'sezzle-price-element';
   // This is used to tell where to render sezzle element to
@@ -458,6 +461,9 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
 
   // Do not render this product if it is not eligible
   if (!this.isProductEligible(element.textContent)) return false;
+
+  // Do not render the widget if not in list of countriesToShow
+  if(!this.isWidgetVisibileDueToCountry()) return false;
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
   // Get element to be rendered with sezzle's widget
@@ -763,11 +769,39 @@ SezzleJS.prototype.isProductEligible = function (priceText) {
   var price = Helper.parsePrice(priceText);
   this.productPrice = price;
   var priceInCents = price * 100;
+
+  // if(this.countryToShow != 'all'){
+  //     if(this.countryToShow != this.countryCode){
+  //       return false 
+  //     }
+  // }
+  //console.log(this.countryToShow,this.countryCode,'country and code')
   if (priceInCents >= this.minPrice && priceInCents <= this.maxPrice) {
+
     return true;
   }
   return false;
 }
+
+SezzleJs.prototype.isWidgetVisibileDueToCountry = function(){
+
+  this.countryToShow.forEach(funtion(country_alpha){
+    if(country_alpha === this.countryCode){
+      return true
+    }
+  })
+  return false
+}
+
+// SezzleJS.prototype.shouldProductBeShown = function () {
+//   var price = Helper.parsePrice(priceText);
+//   this.productPrice = price;
+//   var priceInCents = price * 100;
+//   if (priceInCents >= this.minPrice && priceInCents <= this.maxPrice) {
+//     return true;
+//   }
+//   return false;
+// }
 
 /**
  * Gets price text
@@ -1054,6 +1088,7 @@ SezzleJS.prototype.getCountryCodeFromIP = function (callback) {
           body = JSON.parse(body);
         }
         this.countryCode = body.country_iso_code;
+
         this.ip = body.ip;
         callback(this.countryCode);
       }
