@@ -464,6 +464,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
 
   // Do not render the widget if not in list of countriesToShow
   if(!this.isWidgetVisibileDueToCountry()) return false;
+
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
   // Get element to be rendered with sezzle's widget
@@ -769,19 +770,16 @@ SezzleJS.prototype.isProductEligible = function (priceText) {
   var price = Helper.parsePrice(priceText);
   this.productPrice = price;
   var priceInCents = price * 100;
-
-  // if(this.countryToShow != 'all'){
-  //     if(this.countryToShow != this.countryCode){
-  //       return false 
-  //     }
-  // }
-  //console.log(this.countryToShow,this.countryCode,'country and code')
   if (priceInCents >= this.minPrice && priceInCents <= this.maxPrice) {
 
     return true;
   }
   return false;
 }
+
+/**
+ * Is the product eligible for display
+ */
 
 SezzleJs.prototype.isWidgetVisibileDueToCountry = function(){
 
@@ -793,15 +791,7 @@ SezzleJs.prototype.isWidgetVisibileDueToCountry = function(){
   return false
 }
 
-// SezzleJS.prototype.shouldProductBeShown = function () {
-//   var price = Helper.parsePrice(priceText);
-//   this.productPrice = price;
-//   var priceInCents = price * 100;
-//   if (priceInCents >= this.minPrice && priceInCents <= this.maxPrice) {
-//     return true;
-//   }
-//   return false;
-// }
+
 
 /**
  * Gets price text
