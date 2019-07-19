@@ -407,13 +407,25 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
         sezzleButtonText.appendChild(priceSpanNode);
         break;
 
-      case 'logo':
-        var logoNode = document.createElement('img');
-        logoNode.className = 'sezzle-logo ' + this.configGroups[configGroupIndex].imageClassName;
-        logoNode.src = this.configGroups[configGroupIndex].imageURL;
-        sezzleButtonText.appendChild(logoNode);
-        this.setLogoSize(logoNode, configGroupIndex);
-        break;
+      // case 'logo':
+      //   var logoNode = document.createElement('img');
+      //   logoNode.className = 'sezzle-logo ' + this.configGroups[configGroupIndex].imageClassName;
+      //   logoNode.src = this.configGroups[configGroupIndex].imageURL;
+      //   sezzleButtonText.appendChild(logoNode);
+      //   this.setLogoSize(logoNode, configGroupIndex);
+			//   break;
+
+			case 'logo':
+				var logoSpanNode = document.createElement('span');
+				logoSpanNode.className = 'logo-spacing';
+				var logoNode = document.createElement('img');
+				logoNode.className = 'sezzle-logo ' + this.configGroups[configGroupIndex].imageClassName;
+				logoNode.src = this.configGroups[configGroupIndex].imageURL;
+				logospanNode.appendChild('logoNode');
+				sezzleButtonText.appendChild(logoSpanNode);
+				this.setLogoSize(logoNode, configGroupIndex);
+				break;
+
       // changed from learn-more to link as that is what current altVersionTemplates use
       case 'link':
         var learnMoreNode = document.createElement('span');
