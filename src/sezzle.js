@@ -421,7 +421,7 @@ SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index
 				var logoNode = document.createElement('img');
 				logoNode.className = 'sezzle-logo ' + this.configGroups[configGroupIndex].imageClassName;
 				logoNode.src = this.configGroups[configGroupIndex].imageURL;
-				logospanNode.appendChild('logoNode');
+				logoSpanNode.appendChild('logoNode');
 				sezzleButtonText.appendChild(logoSpanNode);
 				this.setLogoSize(logoNode, configGroupIndex);
 				break;
