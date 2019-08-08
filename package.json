@@ -50,5 +50,6 @@
   "keywords": ["sezzle", "merchant", "js", "widget"],
   "dependencies": {
     "lodash.clonedeep": "^4.5.0"
-  }
+  },
+  "modalversion": "1.0.1"
 }
