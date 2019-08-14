@@ -356,11 +356,13 @@ SezzleJS.prototype.setLogoSize = function (element, configGroupIndex) {
  */
 SezzleJS.prototype.renderAwesomeSezzle = function (element, renderelement, index, configGroupIndex) {
   var index = index || 0;
-
+  console.log('########-3.0');
   // Do not render this product if it is not eligible
   if (!this.isProductEligible(element.textContent, configGroupIndex)) return false;
+  console.log('########-3.1');
   // Do not render if sezzle ignored price element
   if (element.classList.contains('sezzle-ignored-price-element')) return false;
+  console.log('########-3.2');
   // Set data index to each price element for tracking
   element.dataset.sezzleindex = index;
   // Get element to be rendered with sezzle's widget
@@ -640,6 +642,7 @@ SezzleJS.prototype.getElementToRender = function (element, index) {
  */
 SezzleJS.prototype.isProductEligible = function (priceText, configGroupIndex) {
   var price = Helper.parsePrice(priceText);
+  console.log('######-4', priceText, price);
   this.configGroups[configGroupIndex].productPrice = price;
   var priceInCents = price * 100;
   return priceInCents >= this.minPrice && priceInCents <= this.maxPrice;
@@ -1145,6 +1148,7 @@ SezzleJS.prototype.initWidget = function () {
       if (configGroup.xpath === []) return;
       this.getElementsByXPath(configGroup.xpath).forEach(function (e) {
         if (!e.hasAttribute('data-sezzleindex')) {
+          console.log('########-1', e);
           els.push({
             element: e,
             toRenderElement: this.getElementToRender(e, index),
@@ -1158,6 +1162,7 @@ SezzleJS.prototype.initWidget = function () {
     // add the sezzle widget to the price elements
     els.forEach(function (el, index) {
       if (!el.element.hasAttribute('data-sezzleindex')) {
+        console.log('########-2', el);
         var sz = this.renderAwesomeSezzle(
           el.element, el.toRenderElement,
           index, el.configGroupIndex
