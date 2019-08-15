@@ -13,13 +13,22 @@ var gulp = require('gulp'),
   compareVersions = require('compare-versions'),
   exec = require('child_process').exec,
 	jeditor = require("gulp-json-editor"),
-  htmlmin = require('gulp-htmlmin');
-  argv = require('yargs').argv;
+  htmlmin = require('gulp-htmlmin'),
+	argv = require('yargs').argv,
+	babel = require('gulp-babel')
 
 
 var buttonUploadName = `sezzle-widget${pjson.version}.js`;
 var globalCssUploadName = `sezzle-styles-global${pjson.cssversion}.css`;
 var defaultModalUploadName = `sezzle-modal-default${pjson.modalversion}.html`;
+
+// babel compilation
+gulp.task('default', function() {
+	return gulp.src('src/sezzle.js')
+		.pipe(babel())
+		.pipe(gulp.dest("dist"));
+		)
+})
 
 /**
  * Tasks for the CSS
