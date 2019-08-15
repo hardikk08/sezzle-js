@@ -27,8 +27,7 @@ gulp.task('default', function() {
 	return gulp.src('src/sezzle.js')
 		.pipe(babel())
 		.pipe(gulp.dest("dist"));
-		)
-})
+});
 
 /**
  * Tasks for the CSS
