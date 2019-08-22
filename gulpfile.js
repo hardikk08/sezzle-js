@@ -23,8 +23,8 @@ var globalCssUploadName = `sezzle-styles-global${pjson.cssversion}.css`;
 var defaultModalUploadName = `sezzle-modal-default${pjson.modalversion}.html`;
 
 // babel compilation
-gulp.task('default', function() {
-	return gulp.src('src/sezzle.js')
+gulp.task('babelcompile', function() {
+	return gulp.src('dist/babel-sezzle.js')
 		.pipe(babel())
 		.pipe(gulp.dest("dist"));
 });
